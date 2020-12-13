@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
+import com.cg.employeepayollappnew.exception.EmployeeException;
 import com.cg.employeepayollappnew.model.Employee;
 import com.cg.employeepayollappnew.services.EmployeePayrollService;
 import com.cg.employeepayollappnew.services.IEmployeePayrollService;
@@ -31,11 +32,9 @@ public class EmployeePayrollController {
 		return "hello";
 	}
 	
-	@GetMapping("/get/{empID}")
-	public Optional<Employee> getEmployeeDetails(@PathVariable long empID) {
-		return employeePayrollService.getEmployeeData(empID);
-//		return new Optional<Employee>(emp,HttpStatus.OK);
-	
+	@GetMapping("/get/{empId}")
+	public Employee getEmployeeDetails(@PathVariable long empId) throws EmployeeException {
+		return employeePayrollService.getEmployeeData(empId);	
 	}
 	
 	@PostMapping("/create")
@@ -44,13 +43,13 @@ public class EmployeePayrollController {
 		return new ResponseEntity<String>("Added EmployeePayroll Data",HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update/{empID}")
-	public ResponseEntity updateEmployee(@RequestBody EmployeePayrollDTO employeePayrollDTO,
-											@PathVariable long empId) {
-		return null;
+	@PutMapping("/update/{empId}")
+	public ResponseEntity<String> updateEmployee(@PathVariable long empId,@RequestBody EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
+		employeePayrollService.updateEmployeeById(empId,employeePayrollDTO);
+		return new ResponseEntity<String>("Employee updated", HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{empID}")
+	@DeleteMapping("/delete/{empId}")
 	public ResponseEntity deleteEmployee(@RequestBody EmployeePayrollDTO employeePayrollDTO,
 			@PathVariable long empId) {
 			return null;
