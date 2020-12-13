@@ -50,8 +50,8 @@ public class EmployeePayrollController {
 	}
 	
 	@DeleteMapping("/delete/{empId}")
-	public ResponseEntity deleteEmployee(@RequestBody EmployeePayrollDTO employeePayrollDTO,
-			@PathVariable long empId) {
-			return null;
+	public ResponseEntity<String> deleteEmployee(@PathVariable long empId, @RequestBody EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
+		employeePayrollService.deleteEmployeeById(empId);
+		return new ResponseEntity<String>("Employee deleted", HttpStatus.OK);
 }
 }

@@ -42,11 +42,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 		
 	}
 
-//	@Override
-//	public void updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) {
-//		Optional<Employee> emp = getEmployeeData(empId);
-//		if(employeePayrollDTO.name!=null) {
-//			emp.setName(employeePayrollDTO.name);
-//		}
-		
+	@Override
+	public void deleteEmployeeById(long empId) throws EmployeeException {
+		employeePayrollRepo.deleteById(empId);
+	}		
 }

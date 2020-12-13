@@ -15,4 +15,6 @@ public interface IEmployeePayrollService {
 	Employee getEmployeeData(long empID) throws EmployeeException;
 
 	void updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException;
+
+	void deleteEmployeeById(long empId) throws EmployeeException;
 }
