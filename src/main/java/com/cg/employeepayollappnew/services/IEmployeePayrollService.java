@@ -1,9 +1,6 @@
 package com.cg.employeepayollappnew.services;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
 
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
 import com.cg.employeepayollappnew.exception.EmployeeException;
@@ -15,9 +12,9 @@ public interface IEmployeePayrollService {
 
 	Employee getEmployeeData(long empID) throws EmployeeException;
 
-	void updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException;
+	Employee updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException;
 
-	void deleteEmployeeById(long empId) throws EmployeeException;
+	Employee deleteEmployeeById(long empId) throws EmployeeException;
 
-	List getAllEmployeeData();
+	List<Employee> getAllEmployeeData();
 }

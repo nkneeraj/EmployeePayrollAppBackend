@@ -1,14 +1,10 @@
 package com.cg.employeepayollappnew.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
 import com.cg.employeepayollappnew.dto.ResponseDTO;
 import com.cg.employeepayollappnew.exception.EmployeeException;
 import com.cg.employeepayollappnew.model.Employee;
-import com.cg.employeepayollappnew.services.EmployeePayrollService;
 import com.cg.employeepayollappnew.services.IEmployeePayrollService;
 
 import io.swagger.annotations.ApiOperation;
@@ -46,18 +40,23 @@ public class EmployeePayrollController {
 		Employee emp = employeePayrollService.getEmployeeData(empId);
 		return new ResponseEntity<Employee>(emp, HttpStatus.OK);
 	}
+
 	
+	@ApiOperation(value = "This api is used to fetch all Employye details.", response = Employee.class)
 	@GetMapping("/getall")
-	public ResponseEntity<List<Employee>> getAllEmployees(){
-		List employeesList = employeePayrollService.getAllEmployeeData();
+	public ResponseEntity<List<Employee>> getAllEmployees() {
+		List<Employee> employeesList = employeePayrollService.getAllEmployeeData();
 		return new ResponseEntity<>(employeesList, HttpStatus.OK);
 	}
 
 	/**
 	 * This api is used to add new Employee to database.
+	 * 
 	 * @param employeePayrollDTO
 	 * @return
 	 */
+
+	@ApiOperation(value = "This api used to create new Employee", notes = "Enter name with first capital and length in 3-10 \n Enter Salary with digit length in 3-10", response = Employee.class)
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addEmployee(@RequestBody @Valid EmployeePayrollDTO employeePayrollDTO) {
 		System.out.println("In create api");
@@ -65,17 +64,18 @@ public class EmployeePayrollController {
 		return new ResponseEntity<ResponseDTO>(new ResponseDTO("Added EmployeePayroll Data", emp), HttpStatus.CREATED);
 	}
 
+	@ApiOperation(value = "This api used to update the employee details for given empId", notes = "Enter empId in long form.", response = Employee.class)
 	@PutMapping("/update/{empId}")
-	public ResponseEntity<String> updateEmployee(@PathVariable long empId,
+	public ResponseEntity<ResponseDTO> updateEmployee(@PathVariable long empId,
 			@RequestBody EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
-		employeePayrollService.updateEmployeeById(empId, employeePayrollDTO);
-		return new ResponseEntity<String>("Employee updated", HttpStatus.OK);
+		Employee emp = employeePayrollService.updateEmployeeById(empId, employeePayrollDTO);
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO("Updated EmployeePayroll Data", emp), HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "This api used to delete the employee details for given empId.", notes = "Enter empId in long form.", response = Employee.class)
 	@DeleteMapping("/delete/{empId}")
-	public ResponseEntity<String> deleteEmployee(@PathVariable long empId,
-			@RequestBody EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
-		employeePayrollService.deleteEmployeeById(empId);
-		return new ResponseEntity<String>("Employee deleted", HttpStatus.OK);
+	public ResponseEntity<ResponseDTO> deleteEmployee(@PathVariable long empId) throws EmployeeException {
+		Employee emp = employeePayrollService.deleteEmployeeById(empId);
+		return new ResponseEntity<ResponseDTO>(new ResponseDTO("Deleted EmployeePayroll Data", emp), HttpStatus.OK);
 	}
 }
