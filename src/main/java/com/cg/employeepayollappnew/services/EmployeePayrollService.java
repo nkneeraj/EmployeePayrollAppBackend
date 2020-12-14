@@ -24,7 +24,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Override
 	public Employee getEmployeeData(long empId) throws EmployeeException{
-		return employeePayrollRepo.findById(empId).orElseThrow(()->new EmployeeException("Invalid User id"));
+		return employeePayrollRepo.findById(empId).orElseThrow(() -> new EmployeeException("Invalid User id"));
 	}
 	
 	@Override
@@ -47,6 +47,9 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Override
 	public void deleteEmployeeById(long empId) throws EmployeeException {
+		Employee emp = employeePayrollRepo.findById(empId).orElseThrow(() -> new EmployeeException("Invalid User id"));
+		if(emp==null)
+			return;
 		employeePayrollRepo.deleteById(empId);
 	}	
 }
