@@ -29,6 +29,7 @@ public class EmployeePayrollController {
 	private IEmployeePayrollService employeePayrollService;
 
 	/**
+	 * This is a demo API to check the get request.
 	 * @return
 	 */
 	@ApiOperation(value = "This api is used for demo purpose only.")
@@ -38,6 +39,7 @@ public class EmployeePayrollController {
 	}
 	
 	/**
+	 * This API is used get the details for given empId;
 	 * @param empId
 	 * @return
 	 * @throws EmployeeException
@@ -51,6 +53,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is to get all Employee details.
 	 * @return
 	 */
 	@ApiOperation(value = "This api is used to fetch all Employye details.", response = Employee.class)
@@ -61,7 +64,7 @@ public class EmployeePayrollController {
 	}
 
 	/**
-	 * This api is used to add new Employee to database.
+	 * This API is used to add new Employee to database.
 	 * 
 	 * @param employeePayrollDTO
 	 * @return
@@ -77,6 +80,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is used to update the employee details for given empId.
 	 * @param empId
 	 * @param employeePayrollDTO
 	 * @return
@@ -92,6 +96,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is used to delete the Employee details for given empID.
 	 * @param empId
 	 * @return
 	 * @throws EmployeeException

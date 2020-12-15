@@ -39,10 +39,13 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	@Override
 	public Employee updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
 		Employee emp = getEmployeeData(empId);
-		modelMapper.map(employeePayrollDTO, emp);
-//		emp.setName(employeePayrollDTO.name);
-//		emp.setSalary(employeePayrollDTO.salary);
-		return employeePayrollRepo.save(getEmployeeData(empId));
+//		modelMapper.map(employeePayrollDTO, emp);
+		emp.setName(employeePayrollDTO.getName());
+		emp.setBasic_pay(employeePayrollDTO.getBasic_pay());
+		emp.setDepartment(employeePayrollDTO.getDepartment());
+		emp.setGender(employeePayrollDTO.getGender());
+		emp.setStart(employeePayrollDTO.getStartDate());
+		return employeePayrollRepo.save(emp);
 	}
 
 	@Override
