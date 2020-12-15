@@ -1,6 +1,8 @@
 package com.cg.employeepayollappnew.services;
 
 import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
@@ -13,10 +15,14 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Autowired
 	private IEmployeePayrollRepository employeePayrollRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public Employee addEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
 		Employee emp = new Employee(employeePayrollDTO);
+		modelMapper.map(employeePayrollDTO, emp);
 		return employeePayrollRepo.save(emp);
 	}
 
@@ -33,23 +39,16 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	@Override
 	public Employee updateEmployeeById(long empId, EmployeePayrollDTO employeePayrollDTO) throws EmployeeException {
 		Employee emp = getEmployeeData(empId);
-		if (employeePayrollDTO.name != null) {
-			emp.setName(employeePayrollDTO.name);
-		}
-		if (employeePayrollDTO.salary != 0.0) {
-			emp.setSalary(employeePayrollDTO.salary);
-		}
-		employeePayrollRepo.save(emp);
-		return emp;
+		modelMapper.map(employeePayrollDTO, emp);
+//		emp.setName(employeePayrollDTO.name);
+//		emp.setSalary(employeePayrollDTO.salary);
+		return employeePayrollRepo.save(getEmployeeData(empId));
 	}
 
 	@Override
 	public Employee deleteEmployeeById(long empId) throws EmployeeException {
-		Employee emp = employeePayrollRepo.findById(empId).orElseThrow(() -> new EmployeeException("Invalid User id"));
-		if (emp == null)
-			return null;
-		Employee emp1 = emp;
+		Employee emp = getEmployeeData(empId);
 		employeePayrollRepo.deleteById(empId);
-		return emp1;
+		return emp;
 	}
 }
