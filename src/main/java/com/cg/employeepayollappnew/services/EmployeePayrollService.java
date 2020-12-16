@@ -44,7 +44,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 		emp.setBasic_pay(employeePayrollDTO.getBasic_pay());
 		emp.setDepartment(employeePayrollDTO.getDepartment());
 		emp.setGender(employeePayrollDTO.getGender());
-		emp.setStart(employeePayrollDTO.getStartDate());
+		emp.setStart(employeePayrollDTO.getStart());
 		return employeePayrollRepo.save(emp);
 	}
 

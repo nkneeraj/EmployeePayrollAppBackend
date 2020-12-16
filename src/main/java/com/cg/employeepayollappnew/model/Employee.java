@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
 
@@ -26,8 +27,9 @@ public class Employee implements Serializable{
 		@Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Long id;
+//		@Pattern(regexp = "^[A-Z]{1}[a-z A-Z]{2,} //s [A-Z]{0,}[a-z A-Z]{0,}", message = "Invalid Name")
         private String name;
-        private String gender;
+        private char gender;
         private String department;
         private double basic_pay;
         private String start;
@@ -41,10 +43,10 @@ public class Employee implements Serializable{
         	this.gender = employeePayrollDTO.getGender();
         	this.department = employeePayrollDTO.getDepartment();
         	this.basic_pay = employeePayrollDTO.getBasic_pay();
-        	this.start = employeePayrollDTO.getStartDate();
+        	this.start = employeePayrollDTO.getStart();
     	}
         
-        public Employee(String name, String gender, String department, double salary, String startDate) {
+        public Employee(String name, char gender, String department, double basic_pay, String startDate) {
         	
         }
 }

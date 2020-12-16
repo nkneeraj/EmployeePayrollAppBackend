@@ -23,10 +23,10 @@ public class EmployeePayrollDTO {
 //	}
 
 	private String name;
-	private String gender;
+	private char gender;
 	private String department;
 	private double basic_pay;
-	private String startDate;
+	private String start;
 	public EmployeePayrollDTO() {
 
 	}
@@ -36,6 +36,6 @@ public class EmployeePayrollDTO {
 		this.gender = employee.getGender();
 		this.department = employee.getDepartment();
 		this.basic_pay = employee.getBasic_pay();
-		this.startDate = employee.getStart();
+		this.start = employee.getStart();
 	}
 }
