@@ -41,10 +41,11 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 		Employee emp = getEmployeeData(empId);
 //		modelMapper.map(employeePayrollDTO, emp);
 		emp.setName(employeePayrollDTO.getName());
-		emp.setBasic_pay(employeePayrollDTO.getBasic_pay());
+		emp.setSalary(employeePayrollDTO.getSalary());
 		emp.setDepartment(employeePayrollDTO.getDepartment());
 		emp.setGender(employeePayrollDTO.getGender());
-		emp.setStart(employeePayrollDTO.getStart());
+		emp.setStartDate(employeePayrollDTO.getStartDate());
+		emp.setProfile(employeePayrollDTO.getStartDate());
 		return employeePayrollRepo.save(emp);
 	}
 

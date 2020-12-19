@@ -1,12 +1,20 @@
 package com.cg.employeepayollappnew.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
 import com.cg.employeepayollappnew.dto.EmployeePayrollDTO;
@@ -29,10 +37,21 @@ public class Employee implements Serializable{
 	    private Long id;
 //		@Pattern(regexp = "^[A-Z]{1}[a-z A-Z]{2,} //s [A-Z]{0,}[a-z A-Z]{0,}", message = "Invalid Name")
         private String name;
-        private char gender;
-        private String department;
-        private double basic_pay;
-        private String start;
+        
+//        @Column(unique=true)
+        private String gender;
+        
+        @Column(name = "department")
+        @ElementCollection
+        @CollectionTable(name="Employee_departmentt", joinColumns = @JoinColumn(name = "id")) //one to many 
+        private List<String> department;
+//        @OneToMany(cascade = CascadeType.ALL)
+        
+
+        private String salary;
+        private String startDate;
+        private String notes;
+        private String profile;
         
         public Employee() {
 			// TODO Auto-generated constructor stub
@@ -42,11 +61,13 @@ public class Employee implements Serializable{
         	this.name = employeePayrollDTO.getName();
         	this.gender = employeePayrollDTO.getGender();
         	this.department = employeePayrollDTO.getDepartment();
-        	this.basic_pay = employeePayrollDTO.getBasic_pay();
-        	this.start = employeePayrollDTO.getStart();
+        	this.salary = employeePayrollDTO.getSalary();
+        	this.startDate = employeePayrollDTO.getStartDate();
+        	this.notes = employeePayrollDTO.getNotes();
+        	this.profile = employeePayrollDTO.getProfile();
     	}
         
-        public Employee(String name, char gender, String department, double basic_pay, String startDate) {
-        	
-        }
+//        public Employee(String name, char gender, String department, double basic_pay, String startDate) {
+//        	
+//        }
 }

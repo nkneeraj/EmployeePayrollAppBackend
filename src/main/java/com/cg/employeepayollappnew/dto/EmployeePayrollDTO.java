@@ -1,5 +1,7 @@
 package com.cg.employeepayollappnew.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.Min;
 
 import javax.validation.constraints.Pattern;
@@ -22,11 +24,14 @@ public class EmployeePayrollDTO {
 //		this.salary=salary;
 //	}
 
+	@Pattern(regexp = "^[A-Z]{1}[a-z]{2,}" , message = "Invalid name")
 	private String name;
-	private char gender;
-	private String department;
-	private double basic_pay;
-	private String start;
+	private String profile;
+	private String gender;
+	private List<String> department;
+	private String salary;
+	private String startDate;
+	private String notes;
 	public EmployeePayrollDTO() {
 
 	}
@@ -35,7 +40,9 @@ public class EmployeePayrollDTO {
 		this.name = employee.getName();
 		this.gender = employee.getGender();
 		this.department = employee.getDepartment();
-		this.basic_pay = employee.getBasic_pay();
-		this.start = employee.getStart();
+		this.salary = employee.getSalary();
+		this.startDate = employee.getStartDate();
+		this.notes = employee.getNotes();
+		this.profile = employee.getProfile();
 	}
 }
