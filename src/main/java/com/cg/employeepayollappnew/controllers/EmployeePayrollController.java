@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +22,16 @@ import com.cg.employeepayollappnew.services.IEmployeePayrollService;
 
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/employeepayrollservice")
+@RequestMapping("/employee")
 public class EmployeePayrollController {
 
 	@Autowired
 	private IEmployeePayrollService employeePayrollService;
 
 	/**
+	 * This is a demo API to check the get request.
 	 * @return
 	 */
 	@ApiOperation(value = "This api is used for demo purpose only.")
@@ -38,6 +41,7 @@ public class EmployeePayrollController {
 	}
 	
 	/**
+	 * This API is used get the details for given empId;
 	 * @param empId
 	 * @return
 	 * @throws EmployeeException
@@ -51,6 +55,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is to get all Employee details.
 	 * @return
 	 */
 	@ApiOperation(value = "This api is used to fetch all Employye details.", response = Employee.class)
@@ -61,7 +66,7 @@ public class EmployeePayrollController {
 	}
 
 	/**
-	 * This api is used to add new Employee to database.
+	 * This API is used to add new Employee to database.
 	 * 
 	 * @param employeePayrollDTO
 	 * @return
@@ -77,6 +82,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is used to update the employee details for given empId.
 	 * @param empId
 	 * @param employeePayrollDTO
 	 * @return
@@ -92,6 +98,7 @@ public class EmployeePayrollController {
 
 	
 	/**
+	 * This API is used to delete the Employee details for given empID.
 	 * @param empId
 	 * @return
 	 * @throws EmployeeException
